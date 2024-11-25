@@ -1,0 +1,1 @@
+g++ FileRWTester.cc FileStatus.cc FileThread.cc FileThreadRW.cc FileWithCache.cc -o FileWithCacheTest  -std=c++11 -O3 -Wall -lpthread -g -fsanitize=address
