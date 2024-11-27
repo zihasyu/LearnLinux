@@ -1,11 +1,9 @@
 #include <stdio.h>
-// #include <stdlib.h>
-// #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <dirent.h>
 
-// 打印文件的元数据信息，包括文件类型、权限和大小。
+// 打印文件的metadata，包括文件类型、权限和大小。
 void print_file_info(struct dirent *de, struct stat st)
 {
     printf((S_ISDIR(st.st_mode)) ? "d" : "-");  // 检查文件类型 是否是目录
@@ -34,7 +32,7 @@ int main()
     struct dirent *de; // 用于存储目录中的文件
     while ((de = readdir(dr)) != NULL)
     {
-        struct stat st; // 用于存储文件的元数据信息
+        struct stat st; // 用于存储文件的metadata
         if (de->d_name[0] == '.' || (de->d_name[0] == '.' && de->d_name[1] == '.'))
         {
             continue;
@@ -45,6 +43,6 @@ int main()
         }
     }
 
-    closedir(dr); // 关闭目录
+    closedir(dr);
     return 0;
 }
