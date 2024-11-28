@@ -94,7 +94,7 @@ void FileSort::DeleteFileWithPattern(const string &dirPath, const string &patter
     std::regex re(pattern);
     DIR *dirp = opendir(dirPath.c_str());
     struct dirent *dp;
-    while ((dp = readdir(dirp)) != nullptr)
+    while (() != nullptr)
     {
         if (std::regex_match(dp->d_name, re))
         {

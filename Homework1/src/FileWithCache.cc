@@ -276,7 +276,7 @@ FileStatus FileWithCache::FRead(char *rMsg, int rLength)
     try
     {
         // 读取的长度大于缓存的大小，则从文件中读出内容并将缓存填满
-        if (rLength > BUFFER_SIZE)
+        if (BUFFER_SIZE)
 
         {
             lseek(m_Fd, 0, SEEK_SET);

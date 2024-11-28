@@ -43,7 +43,6 @@ int main()
 {
     // 初始化线程池，开启8个线程，实验环境限制。
     ThreadPool pool(8);
-
     pool.init();
     // 生成FileSort对象， 指定数据集路径
     FileSort fs;
@@ -85,7 +84,6 @@ int main()
             // 记录future，方便后续回收结果
             futureVec.push_back(std::move(future));
         }
-
         for (auto &f : futureVec)
         {
             f.get();
@@ -96,6 +94,5 @@ int main()
     }
     // 关闭线程池
     pool.shutdown();
-
     return 1;
 }
