@@ -5,7 +5,7 @@
 int main()
 {
     char *str = "University of Electronic Science and Technology of China\n";
-    char str1[29] = "Computer Science and Technology\n";
+    char *str1 = "Computer Science and Technology\n";
     FileThread *wThread = new FileWriteThread(str);
     FileThread *wThread1 = new FileWriteThread(str1);
     FileThread *rThread = new FileReadThread(12);
