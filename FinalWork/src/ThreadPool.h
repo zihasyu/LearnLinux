@@ -158,16 +158,15 @@ public:
         }
     }
 
-    /*
-        解释一下submit函数的定义，auto关键字不能用于函数形参的类型推导，在C++14以前，也不能直接用auto func()的形式来推导函数的返回类型。
-        在C++11中引入了关键字decltype，可以用来推导函数的返回类型，但如果我们这样写 decltype(x+y) add(T x, U y) 也会出现问题，因为x 和 y 的类型尚未定义
-        因此可以使用尾返回类型推导技术，利用auto关键字将返回类型后置：
-        template<typename T, typename U>
-        auto add2(T x, U y) -> decltype(x+y){
-            return x + y;
-        }
-        因此submit函数的返回值将从std::future<decltype(f(args...))>中自动推导得出。
-    */
+    // 解释一下submit函数的定义，auto关键字不能用于函数形参的类型推导，在C++14以前，也不能直接用auto func()的形式来推导函数的返回类型。
+    // 在C++11中引入了关键字decltype，可以用来推导函数的返回类型，但如果我们这样写 decltype(x+y) add(T x, U y) 也会出现问题，因为x 和 y 的类型尚未定义
+    // 因此可以使用尾返回类型推导技术，利用auto关键字将返回类型后置：
+    // template<typename T, typename U>
+    // auto add2(T x, U y) -> decltype(x+y){
+    //     return x + y;
+    // }
+    // 因此submit函数的返回值将从std::future<decltype(f(args...))>中自动推导得出。
+
     template <typename F, typename... Args>
     auto submit(F &&f, Args &&...args) -> std::future<decltype(f(args...))>
     {

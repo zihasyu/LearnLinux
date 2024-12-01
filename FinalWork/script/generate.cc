@@ -6,7 +6,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-const std::string DATA_DIR = "./bin/testData";
+const std::string DATA_DIR = "./testData";
 const uint64_t TARGET_TOTAL_SIZE = 128ULL * 1024 * 1024 * 1024; // 128GB
 const uint64_t MAX_FILE_SIZE = 8ULL * 1024 * 1024 * 1024;       // 8GB
 const uint64_t MIN_FILE_SIZE = 16 * 1024;                       // 16KB
@@ -14,7 +14,7 @@ const uint64_t MIN_FILE_SIZE = 16 * 1024;                       // 16KB
 std::random_device rd;
 std::mt19937_64 gen(rd());
 std::uniform_int_distribution<int64_t> dist(INT64_MIN, INT64_MAX);
-std::exponential_distribution<double> exp_dist(0.0000000001);
+std::uniform_int_distribution<uint64_t> size_dist(MIN_FILE_SIZE, MAX_FILE_SIZE);
 
 int64_t generate_random_number()
 {
@@ -23,16 +23,7 @@ int64_t generate_random_number()
 
 uint64_t generate_file_size()
 {
-    uint64_t size = static_cast<uint64_t>(exp_dist(gen));
-    if (size < MIN_FILE_SIZE)
-    {
-        size = MIN_FILE_SIZE;
-    }
-    else if (size > MAX_FILE_SIZE)
-    {
-        size = MAX_FILE_SIZE;
-    }
-    return size;
+    return size_dist(gen);
 }
 
 void generate_file(const std::string &file_path, uint64_t file_size)
